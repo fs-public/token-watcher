@@ -1,7 +1,14 @@
 {
     "name": "dai-transfers",
-    "version": "0.1.0",
-    "private": true,
+    "version": "0.1.1",
+    "author": "fs-public",
+    "license": "MIT",
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "sloc": "sloc src"
+    },
     "dependencies": {
         "@reduxjs/toolkit": "^1.8.6",
         "@testing-library/jest-dom": "^5.16.5",
@@ -19,11 +26,9 @@
         "web3-eth": "^1.8.0",
         "web3-eth-contract": "^1.8.0"
     },
-    "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject"
+    "devDependencies": {
+        "sloc": "^0.2.1",
+        "tailwindcss": "^3.2.1"
     },
     "eslintConfig": {
         "extends": [
@@ -43,11 +48,11 @@
             "last 1 safari version"
         ]
     },
-    "devDependencies": {
-        "tailwindcss": "^3.2.1"
-    },
     "prettier": {
         "tabWidth": 4,
         "singleQuote": false
+    },
+    "overrides": {
+        "@svgr/webpack": "^6.2.1"
     }
 }

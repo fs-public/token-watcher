@@ -1,9 +1,12 @@
 export const DAI_ADDRESS = "0x6b175474e89094c44da98b954eedeac495271d0f";
 
-export const RPC_ENDPOINT_HTTP = "https://mainnet.infura.io/v3/***";
+export const RPC_ENDPOINT_HTTP =
+    "https://mainnet.infura.io/v3/" + process.env.REACT_APP_INFURA_API_KEY;
+console.log(RPC_ENDPOINT_HTTP);
 //"https://rpc.ankr.com/eth";
 
-export const RPC_ENDPOINT_WSS = "wss://mainnet.infura.io/ws/v3/***";
+export const RPC_ENDPOINT_WSS =
+    "wss://mainnet.infura.io/ws/v3/" + process.env.REACT_APP_INFURA_API_KEY;
 
 export const DESIRED_NUMBER_OF_ENTRIES = 100;
 

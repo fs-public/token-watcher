@@ -1,3 +1,13 @@
+# Token Watcher
+
+![Ethereum](https://img.shields.io/badge/Ethereum-3C3C3D?style=for-the-badge&logo=Ethereum&logoColor=white) ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+
+### Repository Goals
+
+![Repo Size](https://img.shields.io/github/repo-size/fs-public/ib-analyzer) ![Refactoring Overload](https://img.shields.io/badge/refactoring-overload-purple)
+
+Refactoring challenge. How much can I optimize the source of this repository in metrics of LOC, and secondarily bundle size? Let's find out!
+
 ### User-level description
 
 **Dai Transfer Watcher** is a simple dapp giving you insight into the latest movements of the [Dai token](https://etherscan.io/address/0x6B175474E89094C44Da98b954EedeAC495271d0F) on Ethereum Mainnet. The features include:

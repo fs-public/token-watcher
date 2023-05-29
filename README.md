@@ -10,6 +10,18 @@ Refactoring challenge. How much can I optimize the source of this repository in 
 
 Readability is still relevant, but secondary.
 
+```plaintext
+| Date       | Version | SLOC | Repo size* ** | Bundle size* | Notes                             |
+|------------|---------|------|---------------|--------------|-----------------------------------|
+| 2022-ish   | 0.1.0   | 1512 | 720 kB        | 6 193 kB     | Original version                  |
+| 29.05.2023 | 0.1.1   | 1515 | 722 kB        | 2 077 kB     | Compilable, remove sourcemaps     |
+|            |         |      |               |              |                                   |
+|            |         |      |               |              |                                   |
+```
+
+\* as measured locally on a Windows machine. Including assets.
+\*\* Without package-lock.json,.
+
 ### User-level description
 
 **Dai Transfer Watcher** is a simple dapp giving you insight into the latest movements of the [Dai token](https://etherscan.io/address/0x6B175474E89094C44Da98b954EedeAC495271d0F) on Ethereum Mainnet. The features include:

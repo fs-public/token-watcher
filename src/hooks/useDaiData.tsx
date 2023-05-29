@@ -2,14 +2,13 @@ import { useState, useEffect } from "react";
 import { PastEventOptions } from "web3-eth-contract/types";
 import { BlockHeader } from "web3-eth/types";
 import { useDispatch, useSelector } from "react-redux";
-import { DESIRED_NUMBER_OF_ENTRIES, USE_MOCK_DATA } from "../constants";
+import { DESIRED_NUMBER_OF_ENTRIES } from "../constants";
 import useWeb3 from "./useWeb3";
 import useDaiEventListener from "./useDaiEventListener";
 import DaiTransfer, { daiTransferFromEvent } from "../models/DaiTransfer";
 import { setData } from "../state/DaiTransfersSlice";
 import { setEmitterFromBlock } from "../state/ApplicationSlice";
 import { RootState } from "../state/store";
-import MockData from "../mock-data.json";
 
 const useDaiData = () => {
     const data = useSelector((state: RootState) => state.daiTransfers.data);
@@ -96,14 +95,10 @@ const useDaiData = () => {
         (async () => {
             const latestBlock = await web3.eth.getBlockNumber();
 
-            if (USE_MOCK_DATA) {
-                dispatch(setData(MockData));
-            } else {
-                let _data = await fetchTransfers(latestBlock);
-                if (isMounted) {
-                    dispatch(setData(_data));
-                    dispatch(setEmitterFromBlock(latestBlock + 1));
-                }
+            let _data = await fetchTransfers(latestBlock);
+            if (isMounted) {
+                dispatch(setData(_data));
+                dispatch(setEmitterFromBlock(latestBlock + 1));
             }
 
             setLoading(false);

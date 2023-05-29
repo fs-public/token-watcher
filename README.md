@@ -6,7 +6,9 @@
 
 ![Repo Size](https://img.shields.io/github/repo-size/fs-public/ib-analyzer) ![Refactoring Overload](https://img.shields.io/badge/refactoring-overload-purple)
 
-Refactoring challenge. How much can I optimize the source of this repository in metrics of LOC, and secondarily bundle size? Let's find out!
+Refactoring challenge. How much can I optimize the source of this repository in metrics of LOC and bundle size? Let's find out!
+
+Readability is still relevant, but secondary.
 
 ### User-level description
 

@@ -2,8 +2,7 @@ import React, { useState, ReactNode } from "react";
 import Web3 from "web3";
 import { ColumnKeysFilterable } from "../types/types";
 import { fireTimeout } from "../utils";
-import FilterIcon from "../assets/filter.svg";
-import FilterActiveIcon from "../assets/filter_active.svg";
+import { Icon } from "@iconify/react";
 
 interface FilterProps {
     fieldKey: ColumnKeysFilterable;
@@ -47,10 +46,16 @@ const Filter = ({ fieldKey, children, filterHandler }: FilterProps) => {
                 }
             >
                 {children}
-                <img
-                    src={filterActive ? FilterActiveIcon : FilterIcon}
-                    alt="Filter"
-                    className="basic-icon"
+                <Icon
+                    icon={
+                        filterActive
+                            ? "ant-design:filter-filled"
+                            : "ant-design:filter-outlined"
+                    }
+                    role="button"
+                    className={`!ml-2 basic-icon ${
+                        filterActive && "text-blue-600"
+                    }`}
                 />
             </div>
             <div

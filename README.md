@@ -11,12 +11,12 @@ Refactoring challenge. How much can I optimize the source of this repository in 
 Readability is still relevant, but secondary.
 
 ```plaintext
-| Date       | Version | SLOC | Repo size* ** | Bundle size* | Notes                             |
-|------------|---------|------|---------------|--------------|-----------------------------------|
-| 2022-ish   | 0.1.0   | 1512 | 720 kB        | 6 193 kB     | Original version                  |
-| 29.05.2023 | 0.1.1   | 1515 | 722 kB        | 2 077 kB     | Compilable, remove sourcemaps     |
-|            |         |      |               |              |                                   |
-|            |         |      |               |              |                                   |
+| Date       | Version | SLOC | Repo size* ** | Bundle size* | Notes                               |
+|------------|---------|------|---------------|--------------|-------------------------------------|
+| 2022-ish   | 0.1.0   | 1512 | 720 kB        | 6 193 kB     | Original version                    |
+| 29.05.2023 | 0.1.1   | 1515 | 722 kB        | 2 077 kB     | Compilable, remove sourcemaps       |
+| 29.05.2023 | 0.2.0   | 1101 | 159 kB        | 1 519 kB     | Replace assets with iconify & grads |
+|            |         |      |               |              |                                     |
 ```
 
 \* as measured locally on a Windows machine. Including assets.

@@ -2,7 +2,6 @@ import React from "react";
 import { ColumnKeysSortable, SortState } from "../types/types";
 import EtherscanLink from "../components/EtherscanLink";
 import { displayNumber } from "../utils";
-import DaiIcon from "../assets/Dai.png";
 import DaiTransfer from "../models/DaiTransfer";
 
 interface DaiTableBodyProps {
@@ -70,7 +69,7 @@ const DaiTableBody = ({ data, sortField, sortOrder }: DaiTableBodyProps) => {
                                     })}
                                 </span>
                                 <img
-                                    src={DaiIcon}
+                                    src="/dai.png"
                                     alt="Dai"
                                     className="basic-icon"
                                 />

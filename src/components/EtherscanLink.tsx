@@ -4,8 +4,7 @@ import {
     getEtherscanAddressLink,
     fireTimeout,
 } from "../utils";
-import CopyIcon from "../assets/copy.svg";
-import CheckmarkIcon from "../assets/checkmark.svg";
+import { Icon } from "@iconify/react";
 
 interface EtherscanLinkProps {
     hex: string;
@@ -37,9 +36,13 @@ const EtherscanLink = ({ hex, type }: EtherscanLinkProps) => {
             >
                 {hex}
             </a>
-            <img
-                src={success ? CheckmarkIcon : CopyIcon}
-                alt="Copy hex to clipboard"
+            <Icon
+                icon={
+                    success
+                        ? "ant-design:check-outlined"
+                        : "ant-design:copy-outlined"
+                }
+                role="button"
                 onClick={copy}
                 className="basic-icon cursor-pointer"
             />

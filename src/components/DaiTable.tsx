@@ -6,7 +6,7 @@ import DaiTableHead from "./DaiTableHead";
 import useDaiData from "../hooks/useDaiData";
 import { setFilter, sortClicked } from "../state/ApplicationSlice";
 import { RootState } from "../state/store";
-import LoadingIcon from "../assets/loading.svg";
+import { Icon } from "@iconify/react";
 
 const DaiTable = () => {
     const { sortField, sortOrder } = useSelector(
@@ -28,32 +28,23 @@ const DaiTable = () => {
     };
 
     return (
-        <table className="table-auto w-full md:w-4/5 xl:w-3/5 min-w-[450px] main-table text-center flex-none">
-            <DaiTableHead
-                {...{ sortField, sortOrder, sortHandler, filterHandler }}
-            />
-
-            {loading ? (
-                <tbody>
-                    <tr className="bg-opacity-30 bg-gray-100">
-                        <td className="px-1 md:px-4 py-5 flex flex-col items-center">
-                            <img
-                                src={LoadingIcon}
-                                alt="Loading..."
-                                width={48}
-                                className=""
-                            />
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            ) : (
+        <>
+            <table className="table-auto w-full md:w-4/5 xl:w-3/5 min-w-[450px] text-center flex-none">
+                <DaiTableHead
+                    {...{ sortField, sortOrder, sortHandler, filterHandler }}
+                />
                 <DaiTableBody {...{ data, sortField, sortOrder }} />
+            </table>
+            {loading && (
+                <div className="w-full flex justify-center py-5">
+                    <Icon
+                        icon="ant-design:loading-outlined"
+                        width={48}
+                        className="animate-[rotating_1s_linear_infinite]"
+                    />
+                </div>
             )}
-        </table>
+        </>
     );
 };
 

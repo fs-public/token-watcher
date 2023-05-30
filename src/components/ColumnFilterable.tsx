@@ -39,19 +39,22 @@ const Filter = ({ fieldKey, children, filterHandler }: FilterProps) => {
 
   return (
     <div className="relative group" tabIndex={0}>
-      <div className="cursor-pointer" onClick={() => document.getElementById("filter_input_" + fieldKey)?.focus()}>
+      <div
+        className="cursor-pointer whitespace-nowrap"
+        onClick={() => document.getElementById("filter_input_" + fieldKey)?.focus()}
+      >
         {children}
         <Icon
           icon={filterActive ? "ant-design:filter-filled" : "ant-design:filter-outlined"}
           role="button"
-          className={`!ml-2 basic-icon ${filterActive && "text-blue-600"}`}
+          className={`basic-icon ${filterActive && "text-highlight"}`}
         />
       </div>
       <div
         className="absolute w-auto p-2 m-2 min-w-max flex flex-col items-center
-                rounded-xl shadow-md bg-pink-200 opacity-100 z-10
+                rounded-xl shadow-md bg-pink opacity-100 z-10
                 transition-all duration-200 scale-0 group-focus-within:scale-100
-                left:0 origin-top-left max-xl:right-0 max-xl:origin-top-right"
+                right-0 origin-top-right lg:left-0 lg:origin-top-left"
       >
         <input
           id={"filter_input_" + fieldKey}
@@ -63,7 +66,7 @@ const Filter = ({ fieldKey, children, filterHandler }: FilterProps) => {
         />
         <button
           onClick={(e) => applyFilter(e)}
-          className="text-white bg-gray-700
+          className="text-white bg-gray-dark
                     rounded-xl w-2/3 mt-2 m-1
                     active:ring-2 active:outline-none active:ring-pink-400"
         >

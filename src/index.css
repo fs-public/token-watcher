@@ -2,9 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html,
+  body {
+    @apply text-sm sm:text-base md:text-lg;
+  }
+}
 @layer components {
   .basic-icon {
-    @apply ml-1 w-4 h-4 inline;
+    @apply ml-0.5 md:ml-2 w-4 h-4 inline;
   }
 }
 

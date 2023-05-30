@@ -10,16 +10,16 @@ interface ColumnSortableProps {
 
 const ColumnSortable = ({ state, children, sortHandler }: ColumnSortableProps) => {
   return (
-    <div onClick={sortHandler} className="cursor-pointer" role="button" tabIndex={0}>
+    <div onClick={sortHandler} className="cursor-pointer whitespace-nowrap" role="button" tabIndex={0}>
       {children}
-      <div>
+      <div className="inline">
         <Icon
           icon="ant-design:arrow-down-outlined"
-          className={`ml-2 inline w-3 mt-1 bottom-0 ${state === SortState.DESC && "text-blue-600"}`}
+          className={`ml-0.5 sm:ml-2 inline w-3 mt-1 bottom-0 ${state === SortState.DESC && "text-highlight"}`}
         />
         <Icon
           icon="ant-design:arrow-down-outlined"
-          className={`-ml-1 inline w-3 mb-1 top-0 rotate-180 ${state === SortState.ASC && "text-blue-600"}`}
+          className={`-ml-1 inline w-3 mb-1 top-0 rotate-180 ${state === SortState.ASC && "text-highlight"}`}
         />
       </div>
     </div>

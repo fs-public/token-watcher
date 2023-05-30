@@ -29,10 +29,9 @@ const DaiTableHead = () => {
             sortHandler={() => sortHandler("timestamp")}
           >
             Timestamp
-            {` (UTC+${Math.round(new Date().getTimezoneOffset() / -60)})`.replace("+-", "-")}
           </ColumnSortable>
         </th>
-        <th className="p-1 md:p-4 md:whitespace-nowrap justify-center text-right">
+        <th className="p-1 md:p-4 justify-center text-right">
           <ColumnSortable
             state={"amount" === sortField ? sortOrder : SortState.INACTIVE}
             sortHandler={() => sortHandler("amount")}
@@ -40,12 +39,12 @@ const DaiTableHead = () => {
             Amount
           </ColumnSortable>
         </th>
-        <th className="p-1 md:p-4 md:whitespace-nowrap justify-center">
+        <th className="p-1 md:p-4 justify-center">
           <ColumnFilterable fieldKey="from" filterHandler={filterHandler}>
             Sender
           </ColumnFilterable>
         </th>
-        <th className="p-1 md:p-4 md:whitespace-nowrap justify-center">
+        <th className="p-1 md:p-4 justify-center">
           <ColumnFilterable fieldKey="to" filterHandler={filterHandler}>
             Recipient
           </ColumnFilterable>

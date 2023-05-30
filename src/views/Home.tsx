@@ -3,7 +3,7 @@ import DaiTable from "../components/DaiTable"
 
 const Home = () => {
   return (
-    <div className="bg-transparent font-[Helvetica] overflow-auto mt-8 md:mt-12 md:flex md: flex-col md:items-center">
+    <div className="bg-transparent pt-8 sm:pt-12 p-1 sm:flex sm:flex-col sm:items-center">
       <div
         className="absolute top-0 w-full h-full -z-10"
         style={{
@@ -13,7 +13,7 @@ const Home = () => {
             radial-gradient(10% 10% at 85% 0%, #FBFFF5, transparent)`,
         }}
       />
-      <div className="p-2 max-md:pl-6 font-[Inter] text-2xl ">Dai Transfer Watcher</div>
+      <div className="p-2 max-md:pl-6 font-title text-2xl ">Dai Transfer Watcher</div>
       <DaiTable />
     </div>
   )

@@ -32,12 +32,12 @@ const DaiTableBody = () => {
         return (
           <tr
             key={id}
-            className={`border-b bg-opacity-30 hover:bg-gray-100
-                                    ${id % 2 === 0 && "bg-gray-100 "}
+            className={`border-b bg-opacity-30 hover:bg-gray-light
+                                    ${id % 2 === 0 && "bg-gray-light"}
                                     ${isNew && "animate-[fadeIn_2s_ease]"}`}
           >
             <td className="px-1 md:px-4 py-5 ">
-              <EtherscanLink hex={row.hash} type="tx" />
+              <EtherscanLink hex={row.hash} />
             </td>
             <td className="px-1 md:px-4 py-5">
               {new Date(row.timestamp! * 1000).toLocaleDateString()}
@@ -46,7 +46,7 @@ const DaiTableBody = () => {
             </td>
             <td className="px-1 md:px-4 py-5">
               <div className="flex items-center justify-end">
-                {isNew && <span className="text-red-500 mr-1 text-lg">&#x2022;</span>}
+                {isNew && <span className="text-red mr-1 text-lg">&#x2022;</span>}
                 <span className="max-md:hidden">
                   {displayNumber(row.amount, {
                     shorthand: false,
@@ -61,10 +61,10 @@ const DaiTableBody = () => {
               </div>
             </td>
             <td className="px-1 md:px-4 py-5">
-              <EtherscanLink hex={row.from} type="address" />
+              <EtherscanLink hex={row.from} />
             </td>
             <td className="px-1 md:px-4 py-5">
-              <EtherscanLink hex={row.to} type="address" />
+              <EtherscanLink hex={row.to} />
             </td>
           </tr>
         )

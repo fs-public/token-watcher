@@ -2,23 +2,18 @@ import React, { useState } from "react"
 import { getEtherscanTxLink, getEtherscanAddressLink, fireTimeout } from "../utils"
 import { Icon } from "@iconify/react"
 
-interface EtherscanLinkProps {
-  hex: string
-  type: "tx" | "address"
-}
-
-const EtherscanLink = ({ hex, type }: EtherscanLinkProps) => {
+const EtherscanLink = ({ hex }: { hex: string }) => {
   const [success, setSuccess] = useState(false)
 
-  const etherscanLink = type === "tx" ? getEtherscanTxLink(hex) : getEtherscanAddressLink(hex)
+  const etherscanLink = hex.length === 66 ? getEtherscanTxLink(hex) : getEtherscanAddressLink(hex)
 
   const copy = () => {
-    navigator.clipboard.writeText(hex).then(
-      () => fireTimeout(setSuccess, true, false),
-      () => {
-        throw new Error("Error writing to clipboard.")
-      }
-    )
+    navigator.clipboard
+      .writeText(hex)
+      .then(() => fireTimeout(setSuccess, true, false))
+      .catch((e) => {
+        throw new Error(`Error writing to clipboard: ${e.reason}`)
+      })
   }
 
   return (
@@ -27,7 +22,7 @@ const EtherscanLink = ({ hex, type }: EtherscanLinkProps) => {
         href={etherscanLink}
         target="_blank"
         rel="noreferrer noopener"
-        className="text-blue-600 w-[6ch] md:w-[12ch] whitespace-nowrap block overflow-ellipsis overflow-hidden"
+        className="text-highlight w-[6ch] md:w-[12ch] whitespace-nowrap block overflow-ellipsis overflow-hidden"
       >
         {hex}
       </a>

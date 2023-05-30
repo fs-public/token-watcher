@@ -9,7 +9,7 @@ const DaiTable = () => {
 
   return (
     <>
-      <table className="table-auto w-full md:w-4/5 max-w-[1000px] min-h-[300px] text-center flex-none">
+      <table className="table-auto w-full md:w-4/5 max-w-[1000px] text-center flex-none">
         <DaiTableHead />
         <DaiTableBody />
       </table>

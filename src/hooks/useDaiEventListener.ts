@@ -1,12 +1,10 @@
 import { useEffect } from "react"
-import { BlockHeader } from "web3-eth/types"
 import Web3 from "web3"
 import { EventData } from "web3-eth-contract/types"
-import { EventEmitter } from "events"
 import { ALLOW_EVENT_LISTENERS } from "../constants"
-import useWeb3 from "../hooks/useWeb3"
+import useWeb3 from "./useWeb3"
 import { daiTransferFromEvent } from "../models/DaiTransfer"
-import DaiAbi from "../abi/Dai.json"
+import DaiAbi from "../abi/dai.json"
 import { DAI_ADDRESS, RPC_ENDPOINT_WSS } from "../constants"
 import useApplicationStore from "../store/useApplicationStore"
 import useDataStore from "../store/useDataStore"
@@ -31,7 +29,7 @@ const useDaiEventListener = () => {
         return
       }
 
-      let block: BlockHeader | null = null
+      let block = null
       for (let i = 0; i < 10; i++) {
         block = await web3.eth.getBlock(e.blockNumber, false)
         if (block === null) {
@@ -54,8 +52,8 @@ const useDaiEventListener = () => {
     const web3_ws = new Web3(RPC_ENDPOINT_WSS)
     const dai_ws = new web3_ws.eth.Contract(DaiAbi, DAI_ADDRESS)
 
-    let emitter: EventEmitter
-    let connectedId: string = ""
+    let emitter: any
+    let connectedId: string
 
     let isMounted = true
 
@@ -66,7 +64,6 @@ const useDaiEventListener = () => {
         .on("connected", (str: string) => {
           connectedId = str
           if (!isMounted) {
-            // @ts-ignore: Unsure about the type import from web3
             emitter.options.requestManager.removeSubscription(connectedId)
           }
         })
@@ -78,12 +75,10 @@ const useDaiEventListener = () => {
     return () => {
       isMounted = false
       if (emitter !== undefined) {
-        // @ts-ignore: Unsure about the type import from web3
         emitter.options.requestManager.removeSubscription(connectedId)
       }
     }
-    // eslint-disable-next-line
-  }, [fromFilter, toFilter, emitterFromBlock, dai.events])
+  }, [fromFilter, toFilter, emitterFromBlock, dai.events, web3.eth, addEntry])
 }
 
 export default useDaiEventListener

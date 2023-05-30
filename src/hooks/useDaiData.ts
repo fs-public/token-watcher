@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import { PastEventOptions } from "web3-eth-contract/types"
-import { BlockHeader } from "web3-eth/types"
 import { DESIRED_NUMBER_OF_ENTRIES } from "../constants"
 import useWeb3 from "./useWeb3"
 import useDaiEventListener from "./useDaiEventListener"
@@ -56,9 +55,7 @@ const useDaiData = () => {
         .map((row) => row.blockNumber)
         .filter((blockNumber, i, arr) => arr.indexOf(blockNumber) === i)
 
-      let promises: Promise<BlockHeader>[] = uniqueBlocknumbers.map((blockNumber: number) =>
-        web3.eth.getBlock(blockNumber, false)
-      )
+      let promises = uniqueBlocknumbers.map((blockNumber: number) => web3.eth.getBlock(blockNumber, false))
 
       await Promise.allSettled(promises)
 

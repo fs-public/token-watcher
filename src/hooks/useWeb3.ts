@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Web3 from "web3"
 import { Contract, EventData, PastEventOptions } from "web3-eth-contract/types"
-import DaiAbi from "../abi/Dai.json"
+import DaiAbi from "../abi/dai.json"
 import { DAI_ADDRESS, RPC_ENDPOINT_HTTP } from "../constants"
 
 const useWeb3 = () => {

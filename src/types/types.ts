@@ -1,9 +1,7 @@
 export enum SortState {
-  // Note that if keys/values are changed, Icons order in
-  // src/components/SortableColumn needs to be changed as well
-  INACTIVE = 0,
-  DESC = 1,
-  ASC = 2,
+  INACTIVE,
+  DESC,
+  ASC,
 }
 
 type Extends<T, U extends T> = U

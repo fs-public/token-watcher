@@ -87,7 +87,6 @@ serve -s build
 -   **[views] / Home.tsx**: main page view
 -   **App.tsx**: App as per React conventions
 -   **index.tsx**: index as per React conventions
--   **mockData.json**: mock data for testing purposes to be used when web3 connection is not desired
 -   **constants.tsx**: links, keys, behavior settings (e.g. use web3 vs use mock data)
 -   **utils.tsx**: utilities
 

@@ -2,26 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html,
+  body {
+    @apply text-sm sm:text-base md:text-lg;
+  }
+}
 @layer components {
-    .basic-icon {
-        @apply ml-1 w-4 h-4 inline;
-    }
+  .basic-icon {
+    @apply ml-0.5 md:ml-2 w-4 h-4 inline;
+  }
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes rotating {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

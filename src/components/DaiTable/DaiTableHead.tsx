@@ -1,10 +1,10 @@
 import React from "react"
-import { ColumnKeysFilterable, ColumnKeysSortable, SortState } from "../types/types"
-import ColumnFilterable from "../components/ColumnFilterable"
-import ColumnSortable from "./ColumnSortable"
+import { ColumnKeysFilterable, ColumnKeysSortable, SortState } from "../../types/types"
+import ColumnFilterable from "../../components/ColumnFilterable"
+import ColumnSortable from "../ColumnSortable"
 import { useDispatch, useSelector } from "react-redux"
-import { setFilter, sortClicked } from "../state/ApplicationSlice"
-import { RootState } from "../state/store"
+import { setFilter, sortClicked } from "../../state/ApplicationSlice"
+import { RootState } from "../../state/store"
 
 const DaiTableHead = () => {
   const { sortField, sortOrder } = useSelector((state: RootState) => state.application)

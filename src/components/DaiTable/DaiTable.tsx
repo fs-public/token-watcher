@@ -1,7 +1,7 @@
 import React from "react"
 import DaiTableBody from "./DaiTableBody"
 import DaiTableHead from "./DaiTableHead"
-import useDaiData from "../hooks/useDaiData"
+import useDaiData from "../../hooks/useDaiData"
 import { Icon } from "@iconify/react"
 
 const DaiTable = () => {

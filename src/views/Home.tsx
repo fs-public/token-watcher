@@ -1,5 +1,5 @@
 import React from "react"
-import DaiTable from "../components/DaiTable"
+import DaiTable from "../components/DaiTable/DaiTable"
 
 const Home = () => {
   return (

@@ -1,23 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ColumnKeysSortable, SortState } from "../types/types";
 import EtherscanLink from "../components/EtherscanLink";
 import { displayNumber } from "../utils";
 import DaiTransfer from "../models/DaiTransfer";
+import { useSelector } from "react-redux";
+import { RootState } from "../state/store";
+import useDaiData from "../hooks/useDaiData";
 
-interface DaiTableBodyProps {
-    data: DaiTransfer[];
-    sortField: ColumnKeysSortable;
-    sortOrder: SortState;
-}
+const DaiTableBody = () => {
+    const { sortField, sortOrder } = useSelector(
+        (state: RootState) => state.application
+    );
+    const { data } = useDaiData();
 
-const DaiTableBody = ({ data, sortField, sortOrder }: DaiTableBodyProps) => {
-    let displayData = [...data];
+    const [displayData, setDisplayData] = useState(data);
 
-    if (displayData.length >= 2) {
-        let direction = sortOrder === SortState.DESC ? -1 : 1;
+    useEffect(() => {
+        const _displayData = [...data];
 
-        displayData.sort((a, b) => direction * (a[sortField] - b[sortField]));
-    }
+        if (_displayData.length >= 2) {
+            let direction = sortOrder === SortState.DESC ? -1 : 1;
+            _displayData.sort(
+                (a, b) => direction * (a[sortField] - b[sortField])
+            );
+        }
+
+        setDisplayData(_displayData);
+    }, [data, sortField, sortOrder]);
 
     const now = new Date().getTime() / 1000;
 

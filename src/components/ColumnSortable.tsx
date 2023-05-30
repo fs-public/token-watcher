@@ -21,18 +21,20 @@ const ColumnSortable = ({
             tabIndex={0}
         >
             {children}
-            <Icon
-                icon="ant-design:arrow-down-outlined"
-                className={`ml-2 inline w-3 mt-1 bottom-0 ${
-                    state === SortState.DESC && "text-blue-600"
-                }`}
-            />
-            <Icon
-                icon="ant-design:arrow-down-outlined"
-                className={`-ml-1 inline w-3 mb-1 top-0 rotate-180 ${
-                    state === SortState.ASC && "text-blue-600"
-                }`}
-            />
+            <div>
+                <Icon
+                    icon="ant-design:arrow-down-outlined"
+                    className={`ml-2 inline w-3 mt-1 bottom-0 ${
+                        state === SortState.DESC && "text-blue-600"
+                    }`}
+                />
+                <Icon
+                    icon="ant-design:arrow-down-outlined"
+                    className={`-ml-1 inline w-3 mb-1 top-0 rotate-180 ${
+                        state === SortState.ASC && "text-blue-600"
+                    }`}
+                />
+            </div>
         </div>
     );
 };

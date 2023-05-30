@@ -6,20 +6,30 @@ import {
 } from "../types/types";
 import ColumnFilterable from "../components/ColumnFilterable";
 import ColumnSortable from "./ColumnSortable";
+import { useDispatch, useSelector } from "react-redux";
+import { setFilter, sortClicked } from "../state/ApplicationSlice";
+import { RootState } from "../state/store";
 
-interface DaiTableHeadProps {
-    sortField: ColumnKeysSortable;
-    sortOrder: SortState;
-    sortHandler: (sortField: ColumnKeysSortable) => void;
-    filterHandler: (filterField: ColumnKeysFilterable, newRule: string) => void;
-}
+const DaiTableHead = () => {
+    const { sortField, sortOrder } = useSelector(
+        (state: RootState) => state.application
+    );
 
-const DaiTableHead = ({
-    sortField,
-    sortOrder,
-    sortHandler,
-    filterHandler,
-}: DaiTableHeadProps) => {
+    const dispatch = useDispatch();
+
+    // eslint-disable-next-line @typescript-eslint/no-redeclare
+    const sortHandler = (fieldClicked: ColumnKeysSortable) => {
+        dispatch(sortClicked(fieldClicked));
+    };
+
+    // eslint-disable-next-line @typescript-eslint/no-redeclare
+    const filterHandler = (
+        fieldKey: ColumnKeysFilterable,
+        filterRule: string
+    ) => {
+        dispatch(setFilter({ fieldKey, filterRule }));
+    };
+
     return (
         <thead className="border-b">
             <tr>

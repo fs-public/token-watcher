@@ -1,7 +1,6 @@
 import { useEffect } from "react"
 import Web3 from "web3"
 import { EventData } from "web3-eth-contract/types"
-import { ALLOW_EVENT_LISTENERS } from "../constants"
 import useWeb3 from "./useWeb3"
 import { daiTransferFromEvent } from "../models/DaiTransfer"
 import DaiAbi from "../abi/dai.json"
@@ -57,20 +56,21 @@ const useDaiEventListener = () => {
 
     let isMounted = true
 
-    if (ALLOW_EVENT_LISTENERS) {
-      emitter = dai_ws.events
-        .Transfer({ fromBlock: emitterFromBlock })
-        .on("data", (event: EventData) => newEventCallback(event))
-        .on("connected", (str: string) => {
-          connectedId = str
-          if (!isMounted) {
-            emitter.options.requestManager.removeSubscription(connectedId)
-          }
-        })
-        .on("error", (err: string) => {
-          throw new Error("[EventListener] Emitter error: " + err)
-        })
-    }
+    console.log("Subscribing!", [fromFilter, toFilter, emitterFromBlock, dai.events, web3.eth, addEntry])
+
+    emitter = dai_ws.events
+      .Transfer({ fromBlock: emitterFromBlock })
+      .on("data", (event: EventData) => newEventCallback(event))
+      .on("connected", (str: string) => {
+        connectedId = str
+        if (!isMounted) {
+          emitter.options.requestManager.removeSubscription(connectedId)
+        }
+      })
+      .on("error", (err: string) => {
+        console.log(err)
+        throw new Error("[EventListener] Emitter error: " + err)
+      })
 
     return () => {
       isMounted = false
@@ -78,7 +78,8 @@ const useDaiEventListener = () => {
         emitter.options.requestManager.removeSubscription(connectedId)
       }
     }
-  }, [fromFilter, toFilter, emitterFromBlock, dai.events, web3.eth, addEntry])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fromFilter, toFilter, emitterFromBlock])
 }
 
 export default useDaiEventListener

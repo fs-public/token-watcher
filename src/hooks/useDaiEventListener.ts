@@ -9,11 +9,13 @@ import useApplicationStore from "../store/useApplicationStore"
 import useDataStore from "../store/useDataStore"
 
 const useDaiEventListener = () => {
-  const { web3, dai } = useWeb3()
+  const { web3 } = useWeb3()
 
   const fromFilter = useApplicationStore((state) => state.fromFilter)
   const toFilter = useApplicationStore((state) => state.toFilter)
-  const emitterFromBlock = useApplicationStore((state) => state.emitterFromBlock)
+
+  const isFetching = useDataStore((state) => state.isFetching)
+  const emitterFromBlock = useDataStore((state) => state.emitterFromBlock)
 
   const addEntry = useDataStore((state) => state.addEntry)
 
@@ -29,22 +31,21 @@ const useDaiEventListener = () => {
       }
 
       let block = null
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 5; i++) {
         block = await web3.eth.getBlock(e.blockNumber, false)
         if (block === null) {
           // for unfinalized blocks
-          await new Promise((resolve) => setTimeout(resolve, 1000))
-        } else break
+          await new Promise((resolve) => setTimeout(resolve, 2000))
+        } else break // Block probably dropped, dropping event.
       }
 
       if (block !== null) {
-        // Block probably dropped, dropping event.
         d.timestamp = Number(block.timestamp)
         addEntry(d)
       }
     }
 
-    if (emitterFromBlock <= 1) {
+    if (emitterFromBlock <= 1 || isFetching) {
       return // no starting before first fetch finished
     }
 
@@ -56,8 +57,6 @@ const useDaiEventListener = () => {
 
     let isMounted = true
 
-    console.log("Subscribing!", [fromFilter, toFilter, emitterFromBlock, dai.events, web3.eth, addEntry])
-
     emitter = dai_ws.events
       .Transfer({ fromBlock: emitterFromBlock })
       .on("data", (event: EventData) => newEventCallback(event))
@@ -68,7 +67,6 @@ const useDaiEventListener = () => {
         }
       })
       .on("error", (err: string) => {
-        console.log(err)
         throw new Error("[EventListener] Emitter error: " + err)
       })
 
@@ -79,7 +77,7 @@ const useDaiEventListener = () => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fromFilter, toFilter, emitterFromBlock])
+  }, [isFetching, emitterFromBlock])
 }
 
 export default useDaiEventListener

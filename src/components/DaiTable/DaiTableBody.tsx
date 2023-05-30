@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react"
 import { SortState } from "../../types/types"
 import EtherscanLink from "../../components/EtherscanLink"
 import { displayNumber } from "../../utils"
-import useDaiData from "../../hooks/useDaiData"
 import useApplicationStore from "../../store/useApplicationStore"
+import useDataStore from "../../store/useDataStore"
 
 const DaiTableBody = () => {
   const sortField = useApplicationStore((state) => state.sortField)
   const sortOrder = useApplicationStore((state) => state.sortOrder)
 
-  const { data } = useDaiData()
+  const data = useDataStore((state) => state.data)
 
   const [displayData, setDisplayData] = useState(data)
 

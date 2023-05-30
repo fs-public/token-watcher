@@ -5,18 +5,15 @@ import { ColumnKeysFilterable, ColumnKeysSortable, SortState } from "../types/ty
 interface ApplicationState {
   fromFilter: string
   toFilter: string
-  emitterFromBlock: number
   sortField: ColumnKeysSortable
   sortOrder: SortState
   setFilter: (fieldKey: ColumnKeysFilterable, filterRule: string) => void
-  setEmitterFromBlock: (block: number) => void
   sortClicked: (column: ColumnKeysSortable) => void
 }
 
 export const useApplicationStore = create<ApplicationState>((set) => ({
   fromFilter: "",
   toFilter: "",
-  emitterFromBlock: 0,
   sortField: "timestamp",
   sortOrder: SortState.DESC,
 
@@ -30,8 +27,6 @@ export const useApplicationStore = create<ApplicationState>((set) => ({
     if (fieldKey === "from") set({ fromFilter: filterRule })
     else if (fieldKey === "to") set({ toFilter: filterRule })
   },
-
-  setEmitterFromBlock: (block: number) => set({ emitterFromBlock: block }),
 
   sortClicked: (column: ColumnKeysSortable) =>
     set((state) => ({

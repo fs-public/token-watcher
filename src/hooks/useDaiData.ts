@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { PastEventOptions } from "web3-eth-contract/types"
 import { DESIRED_NUMBER_OF_ENTRIES } from "../constants"
 import useWeb3 from "./useWeb3"
@@ -8,13 +8,12 @@ import useDataStore from "../store/useDataStore"
 import useApplicationStore from "../store/useApplicationStore"
 
 const useDaiData = () => {
-  const { data, setData } = useDataStore()
+  const setData = useDataStore((state) => state.setData)
+  const setEmitterFromBlock = useDataStore((state) => state.setEmitterFromBlock)
+  const setIsFetching = useDataStore((state) => state.setIsFetching)
 
   const fromFilter = useApplicationStore((state) => state.fromFilter)
   const toFilter = useApplicationStore((state) => state.toFilter)
-  const setEmitterFromBlock = useApplicationStore((state) => state.setEmitterFromBlock)
-
-  const [loading, setLoading] = useState(true)
 
   const { web3, getInitialEventsInfura } = useWeb3()
 
@@ -77,7 +76,7 @@ const useDaiData = () => {
   }
 
   useEffect(() => {
-    setLoading(true)
+    setIsFetching(true)
 
     let isMounted = true
 
@@ -90,7 +89,7 @@ const useDaiData = () => {
         setEmitterFromBlock(latestBlock + 1)
       }
 
-      setLoading(false)
+      setIsFetching(false)
     })()
 
     return () => {
@@ -99,11 +98,6 @@ const useDaiData = () => {
 
     // eslint-disable-next-line
   }, [fromFilter, toFilter])
-
-  return {
-    data,
-    loading,
-  }
 }
 
 export default useDaiData

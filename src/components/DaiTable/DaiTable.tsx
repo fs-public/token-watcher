@@ -1,11 +1,14 @@
 import React from "react"
 import DaiTableBody from "./DaiTableBody"
 import DaiTableHead from "./DaiTableHead"
-import useDaiData from "../../hooks/useDaiData"
 import { Icon } from "@iconify/react"
+import useDataStore from "../../store/useDataStore"
+import useDaiData from "../../hooks/useDaiData"
 
 const DaiTable = () => {
-  const { loading } = useDaiData()
+  const isFetching = useDataStore((state) => state.isFetching)
+
+  useDaiData()
 
   return (
     <>
@@ -13,7 +16,7 @@ const DaiTable = () => {
         <DaiTableHead />
         <DaiTableBody />
       </table>
-      {loading && (
+      {isFetching && (
         <div className="w-full flex justify-center py-5">
           <Icon icon="ant-design:loading-outlined" width={48} className="animate-[rotating_1s_linear_infinite]" />
         </div>

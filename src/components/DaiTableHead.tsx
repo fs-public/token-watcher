@@ -17,12 +17,10 @@ const DaiTableHead = () => {
 
     const dispatch = useDispatch();
 
-    // eslint-disable-next-line @typescript-eslint/no-redeclare
     const sortHandler = (fieldClicked: ColumnKeysSortable) => {
         dispatch(sortClicked(fieldClicked));
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-redeclare
     const filterHandler = (
         fieldKey: ColumnKeysFilterable,
         filterRule: string

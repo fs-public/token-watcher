@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { ColumnKeysSortable, SortState } from "../types/types";
+import { SortState } from "../types/types";
 import EtherscanLink from "../components/EtherscanLink";
 import { displayNumber } from "../utils";
-import DaiTransfer from "../models/DaiTransfer";
 import { useSelector } from "react-redux";
 import { RootState } from "../state/store";
 import useDaiData from "../hooks/useDaiData";
@@ -37,16 +36,9 @@ const DaiTableBody = () => {
                 return (
                     <tr
                         key={id}
-                        className={`border-b bg-opacity-30 hover:bg-gray-100 ${
-                            id % 2 === 0 && "bg-gray-100 "
-                        } `}
-                        style={
-                            isNew
-                                ? {
-                                      animation: "fadeIn 2s ease 1",
-                                  }
-                                : {}
-                        }
+                        className={`border-b bg-opacity-30 hover:bg-gray-100
+                                    ${id % 2 === 0 && "bg-gray-100 "}
+                                    ${isNew && "animate-[fadeIn_2s_ease]"}`}
                     >
                         <td className="px-1 md:px-4 py-5 ">
                             <EtherscanLink hex={row.hash} type="tx" />

@@ -1,6 +1,4 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { ColumnKeysSortable, ColumnKeysFilterable } from "../types/types";
 import DaiTableBody from "./DaiTableBody";
 import DaiTableHead from "./DaiTableHead";
 import useDaiData from "../hooks/useDaiData";
@@ -13,7 +11,6 @@ const DaiTable = () => {
         <>
             <table className="table-auto w-full md:w-4/5 xl:w-3/5 min-w-[450px] text-center flex-none">
                 <DaiTableHead />
-
                 <DaiTableBody />
             </table>
             {loading && (

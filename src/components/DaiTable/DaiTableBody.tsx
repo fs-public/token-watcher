@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react"
 import { SortState } from "../../types/types"
 import EtherscanLink from "../../components/EtherscanLink"
 import { displayNumber } from "../../utils"
-import { useSelector } from "react-redux"
-import { RootState } from "../../state/store"
 import useDaiData from "../../hooks/useDaiData"
+import useApplicationStore from "../../store/useApplicationStore"
 
 const DaiTableBody = () => {
-  const { sortField, sortOrder } = useSelector((state: RootState) => state.application)
+  const sortField = useApplicationStore((state) => state.sortField)
+  const sortOrder = useApplicationStore((state) => state.sortOrder)
+
   const { data } = useDaiData()
 
   const [displayData, setDisplayData] = useState(data)

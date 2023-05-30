@@ -1,23 +1,11 @@
 import React from "react"
-import { ColumnKeysFilterable, ColumnKeysSortable, SortState } from "../../types/types"
+import { SortState } from "../../types/types"
 import ColumnFilterable from "../../components/ColumnFilterable"
 import ColumnSortable from "../ColumnSortable"
-import { useDispatch, useSelector } from "react-redux"
-import { setFilter, sortClicked } from "../../state/ApplicationSlice"
-import { RootState } from "../../state/store"
+import useApplicationStore from "../../store/useApplicationStore"
 
 const DaiTableHead = () => {
-  const { sortField, sortOrder } = useSelector((state: RootState) => state.application)
-
-  const dispatch = useDispatch()
-
-  const sortHandler = (fieldClicked: ColumnKeysSortable) => {
-    dispatch(sortClicked(fieldClicked))
-  }
-
-  const filterHandler = (fieldKey: ColumnKeysFilterable, filterRule: string) => {
-    dispatch(setFilter({ fieldKey, filterRule }))
-  }
+  const { sortField, sortOrder, sortClicked, setFilter } = useApplicationStore()
 
   return (
     <thead className="border-b">
@@ -26,7 +14,7 @@ const DaiTableHead = () => {
         <th className="p-1 md:p-4 justify-center">
           <ColumnSortable
             state={"timestamp" === sortField ? sortOrder : SortState.INACTIVE}
-            sortHandler={() => sortHandler("timestamp")}
+            sortHandler={sortClicked.bind(undefined, "timestamp")}
           >
             Timestamp
           </ColumnSortable>
@@ -34,18 +22,18 @@ const DaiTableHead = () => {
         <th className="p-1 md:p-4 justify-center text-right">
           <ColumnSortable
             state={"amount" === sortField ? sortOrder : SortState.INACTIVE}
-            sortHandler={() => sortHandler("amount")}
+            sortHandler={sortClicked.bind(undefined, "amount")}
           >
             Amount
           </ColumnSortable>
         </th>
         <th className="p-1 md:p-4 justify-center">
-          <ColumnFilterable fieldKey="from" filterHandler={filterHandler}>
+          <ColumnFilterable fieldKey="from" filterHandler={setFilter}>
             Sender
           </ColumnFilterable>
         </th>
         <th className="p-1 md:p-4 justify-center">
-          <ColumnFilterable fieldKey="to" filterHandler={filterHandler}>
+          <ColumnFilterable fieldKey="to" filterHandler={setFilter}>
             Recipient
           </ColumnFilterable>
         </th>

@@ -3,21 +3,22 @@ import { BlockHeader } from "web3-eth/types"
 import Web3 from "web3"
 import { EventData } from "web3-eth-contract/types"
 import { EventEmitter } from "events"
-import { useSelector, useDispatch } from "react-redux"
 import { ALLOW_EVENT_LISTENERS } from "../constants"
 import useWeb3 from "../hooks/useWeb3"
-import { RootState } from "../state/store"
 import { daiTransferFromEvent } from "../models/DaiTransfer"
-import { addEntry } from "../state/DaiTransfersSlice"
 import DaiAbi from "../abi/Dai.json"
 import { DAI_ADDRESS, RPC_ENDPOINT_WSS } from "../constants"
+import useApplicationStore from "../store/useApplicationStore"
+import useDataStore from "../store/useDataStore"
 
 const useDaiEventListener = () => {
   const { web3, dai } = useWeb3()
 
-  const { fromFilter, toFilter, emitterFromBlock } = useSelector((state: RootState) => state.application)
+  const fromFilter = useApplicationStore((state) => state.fromFilter)
+  const toFilter = useApplicationStore((state) => state.toFilter)
+  const emitterFromBlock = useApplicationStore((state) => state.emitterFromBlock)
 
-  const dispatch = useDispatch()
+  const addEntry = useDataStore((state) => state.addEntry)
 
   useEffect(() => {
     const newEventCallback = async (e: EventData) => {
@@ -42,7 +43,7 @@ const useDaiEventListener = () => {
       if (block !== null) {
         // Block probably dropped, dropping event.
         d.timestamp = Number(block.timestamp)
-        dispatch(addEntry(d))
+        addEntry(d)
       }
     }
 

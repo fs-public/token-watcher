@@ -7,7 +7,5 @@ export const RPC_ENDPOINT_WSS = "wss://mainnet.infura.io/ws/v3/" + process.env.R
 
 export const DESIRED_NUMBER_OF_ENTRIES = 100
 
-export const ALLOW_EVENT_LISTENERS = true
-
 // Address with 4 sends and 1 receive: 0x519037d30a29b0a5ae61884e35c4482a8e7e6f12
 // Address with 10k+ sends and 10k+ receives (Binance14): 0x28c6c06298d514db089934071355e5743bf21d60

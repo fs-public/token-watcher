@@ -1,12 +1,11 @@
-import { useState } from "react"
 import Web3 from "web3"
-import { Contract, EventData, PastEventOptions } from "web3-eth-contract/types"
-import DaiAbi from "../abi/Dai.json"
+import { EventData, PastEventOptions } from "web3-eth-contract/types"
+import DaiAbi from "../abi/dai.json"
 import { DAI_ADDRESS, RPC_ENDPOINT_HTTP } from "../constants"
 
 const useWeb3 = () => {
-  const [web3] = useState<Web3>(new Web3(RPC_ENDPOINT_HTTP))
-  const [dai] = useState<Contract>(new web3.eth.Contract(DaiAbi, DAI_ADDRESS))
+  const web3 = new Web3(RPC_ENDPOINT_HTTP)
+  const dai = new web3.eth.Contract(DaiAbi, DAI_ADDRESS)
 
   // Handles Infura-specific RPC behavior for large-batch queries
   const getInitialEventsInfura = async (
@@ -15,7 +14,7 @@ const useWeb3 = () => {
     desiredEntries: number,
     latestBlock: number,
     firstGuess: number
-  ): Promise<EventData[]> => {
+  ) => {
     let events: EventData[] = []
 
     const getEventsRecursive = async (
@@ -30,7 +29,7 @@ const useWeb3 = () => {
         options.fromBlock = middle
         events = await dai.getPastEvents(eventName, options)
       } catch (e: any) {
-        if (e.message !== "Returned error: query returned more than 10000 results") {
+        if (!e.message.toLowerCase().includes("10000 results")) {
           throw e
         } else {
           tooManyResults = true

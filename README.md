@@ -17,6 +17,7 @@ Readability is still relevant, but secondary.
 | 29.05.2023 | 0.1.1   | 1515 | 33        | 722 kB        | 2 077 kB     | Compilable, remove sourcemaps       |
 | 29.05.2023 | 0.2.0   | 1101 | 23        | 159 kB        | 1 519 kB     | Replace assets with iconify & grads |
 | 30.05.2023 | 0.2.1   | 943  | 23        | 136 kB        | 1 519 kB     | Prettier, Tailwind config, fixes    |
+| 30.05.2023 | 0.2.2   | 868  | 22        | 133 kB        | 1 487 kB     | Replace Redux with Zustand, fixes   |
 |            |         |      |           |               |              |                                     |
 ```
 

@@ -22,7 +22,7 @@ const EtherscanLink = ({ hex }: { hex: string }) => {
         href={etherscanLink}
         target="_blank"
         rel="noreferrer noopener"
-        className="text-highlight w-[6ch] md:w-[12ch] whitespace-nowrap block overflow-ellipsis overflow-hidden"
+        className="text-highlight w-[6ch] sm:w-[8ch] md:w-[12ch] lg:w-[16ch] whitespace-nowrap block overflow-ellipsis overflow-hidden"
       >
         {hex}
       </a>

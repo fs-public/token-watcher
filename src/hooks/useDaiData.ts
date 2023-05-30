@@ -1,25 +1,21 @@
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { PastEventOptions } from "web3-eth-contract/types"
-import { BlockHeader } from "web3-eth/types"
-import { useDispatch, useSelector } from "react-redux"
 import { DESIRED_NUMBER_OF_ENTRIES } from "../constants"
 import useWeb3 from "./useWeb3"
 import useDaiEventListener from "./useDaiEventListener"
 import DaiTransfer, { daiTransferFromEvent } from "../models/DaiTransfer"
-import { setData } from "../state/DaiTransfersSlice"
-import { setEmitterFromBlock } from "../state/ApplicationSlice"
-import { RootState } from "../state/store"
+import useDataStore from "../store/useDataStore"
+import useApplicationStore from "../store/useApplicationStore"
 
 const useDaiData = () => {
-  const data = useSelector((state: RootState) => state.daiTransfers.data)
+  const setData = useDataStore((state) => state.setData)
+  const setEmitterFromBlock = useDataStore((state) => state.setEmitterFromBlock)
+  const setIsFetching = useDataStore((state) => state.setIsFetching)
 
-  const { fromFilter, toFilter } = useSelector((state: RootState) => state.application)
-
-  const [loading, setLoading] = useState(true)
+  const fromFilter = useApplicationStore((state) => state.fromFilter)
+  const toFilter = useApplicationStore((state) => state.toFilter)
 
   const { web3, getInitialEventsInfura } = useWeb3()
-
-  const dispatch = useDispatch()
 
   useDaiEventListener()
 
@@ -58,9 +54,7 @@ const useDaiData = () => {
         .map((row) => row.blockNumber)
         .filter((blockNumber, i, arr) => arr.indexOf(blockNumber) === i)
 
-      let promises: Promise<BlockHeader>[] = uniqueBlocknumbers.map((blockNumber: number) =>
-        web3.eth.getBlock(blockNumber, false)
-      )
+      let promises = uniqueBlocknumbers.map((blockNumber: number) => web3.eth.getBlock(blockNumber, false))
 
       await Promise.allSettled(promises)
 
@@ -82,7 +76,7 @@ const useDaiData = () => {
   }
 
   useEffect(() => {
-    setLoading(true)
+    setIsFetching(true)
 
     let isMounted = true
 
@@ -91,11 +85,11 @@ const useDaiData = () => {
 
       let _data = await fetchTransfers(latestBlock)
       if (isMounted) {
-        dispatch(setData(_data))
-        dispatch(setEmitterFromBlock(latestBlock + 1))
+        setData(_data)
+        setEmitterFromBlock(latestBlock + 1)
       }
 
-      setLoading(false)
+      setIsFetching(false)
     })()
 
     return () => {
@@ -104,11 +98,6 @@ const useDaiData = () => {
 
     // eslint-disable-next-line
   }, [fromFilter, toFilter])
-
-  return {
-    data,
-    loading,
-  }
 }
 
 export default useDaiData
